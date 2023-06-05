@@ -42,7 +42,17 @@ function layGiaTriInput() {
     console.log(_gioLam);
 
     var valid = true;
-    valid = kiemTraRong(_taiKhoan, "tbTKNV") &
+
+    
+        // let x = document.forms["myForm"]["tk"].value;
+        // if (x == "") {
+        //     // document.getElementById("tbTKNV").style.display = '';
+        //     document.getElementById("tbTKNV").style.visibility = "visible";
+        //     document.getElementById("tbTKNV").innerHTML = "Vui long input";
+        //   return false;
+        // }
+      
+    valid = kiemTraRong(_taiKhoan, "tb_tk") &
         kiemTraRong(_hoTen, "tbTen") &
         kiemTraRong(_email, "tbEmail") &
         kiemTraRong(_matKhau, "tbMatKhau") &
@@ -51,11 +61,18 @@ function layGiaTriInput() {
         kiemTraRong(_chucVu, "tbChucVu") &
         kiemTraRong(_gioLam, "tbGiolam");
 
+    valid = kiemTraTK(_taiKhoan, "tb_tk");
+    valid = kiemTraName(_hoTen, "tbTen");
     valid = kiemTraEmail(_email, "tbEmail");
+    valid = kiemTraPass(_matKhau, "tbMatKhau");
+    valid = kiemTraDate(_ngayLam, "tbNgay");
+    valid = kiemTraLuong(_luongCoBan, "tbLuongCB");
+    valid = kiemTraGioLam(_gioLam, "tbGiolam");
     // kiểm tra valid, nếu valid là false thì return
-    // if (!valid) {
-    //     return;
-    // }
+
+    if (!valid) {
+        return;
+    }
     
     var themNhanVien = new NhanVien(
         _taiKhoan,

@@ -37,7 +37,7 @@ function renderGiaoDien(){
                 <button onclick="xoaNhanVien('${themNhanVien.taiKhoan}')" class="btn btn-danger">
                 Delete
                 </button>
-                <button onclick="editNhanVien('${themNhanVien.taiKhoan}')"  class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                <button onclick="editNhanVien('${themNhanVien.taiKhoan}')" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
                 Edit
                 </button>
             </td>
@@ -100,7 +100,6 @@ function editNhanVien(taiKhoan) {
 }
 
 function capNhatThongTinSV(){
-
     // lấy giá trị người dùng
     NhanVienDaChinhSua = layGiaTriInput();
     console.log(NhanVienDaChinhSua.taiKhoan);

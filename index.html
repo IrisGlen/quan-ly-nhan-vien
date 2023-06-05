@@ -187,7 +187,7 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 
-					<form role="form" id="inputForm">
+					<form name="myForm" role="form" id="inputForm" method="post" class="form-horizontal">
 
 						<div class="form-group">
 							<div class="input-group">
@@ -198,7 +198,7 @@
 									placeholder="Tài khoản (tối đa từ 4 ~ 6 ký số)">
 							</div>
 
-							<span class="sp-thongbao" id="tbTKNV"></span>
+							<span class="sp-tb" id="tb_tk"></span>
 						</div>
 
 						<div class="form-group">
@@ -209,7 +209,7 @@
 								<input type="name" name="name" id="name" class="form-control input-sm"
 									placeholder="Họ và tên">
 							</div>
-							<span class="sp-thongbao" id="tbTen"></span>
+							<span class="sp-tb" id="tbTen"></span>
 						</div>
 
 						<div class="form-group">
@@ -221,7 +221,7 @@
 									placeholder="Email">
 							</div>
 
-							<span class="sp-thongbao" id="tbEmail"></span>
+							<span class="sp-tb" id="tbEmail"></span>
 						</div>
 
 						<div class="form-group">
@@ -232,7 +232,7 @@
 								<input type="password" name="password" id="password" class="form-control input-sm"
 									placeholder="Mật khẩu">
 							</div>
-							<span class="sp-thongbao" id="tbMatKhau"></span>
+							<span class="sp-tb" id="tbMatKhau"></span>
 						</div>
 
 						<div class="form-group">
@@ -244,7 +244,7 @@
 									placeholder="Ngày làm">
 							</div>
 
-							<span class="sp-thongbao" id="tbNgay"></span>
+							<span class="sp-tb" id="tbNgay"></span>
 						</div>
 						
 						<div class="form-group">
@@ -255,7 +255,7 @@
 								<input type="text" name="luongCB" id="luongCB" class="form-control input-sm"
 									placeholder="Lương cơ bản">
 							</div>
-							<span class="sp-thongbao" id="tbLuongCB"></span>
+							<span class="sp-tb" id="tbLuongCB"></span>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
@@ -270,7 +270,7 @@
 								</select>
 							</div>
 
-							<span class="sp-thongbao" id="tbChucVu"></span>
+							<span class="sp-tb" id="tbChucVu"></span>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
@@ -278,14 +278,17 @@
 									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
 								</div>
 								<input type="text" name="gioLam" id="gioLam" class="form-control input-sm"
-									placeholder="Giờ làm (8 ~ 200 giờ)">
+									placeholder="Giờ làm (80 ~ 200 giờ)">
 							</div>
-							<span class="sp-thongbao" id="tbGiolam"></span>
+							<span class="sp-tb" id="tbGiolam"></span>
 						</div>
 
 					</form>
 				</div>
-
+				<div class="modal-body">
+					<!-- The messages container -->
+					<div id="errors"></div>
+				</div>
 				<!-- Modal footer -->
 				<div class="modal-footer" id="modal-footer">
 					<button onclick="themNhanVien()" id="btnThemNV" type="button" class="btn btn-success">Thêm người dùng</button>
@@ -324,6 +327,7 @@
 			});
 		});
 	</script>
+	
 	<script src="./models/NhanVien.js"></script>
 	<script src="./models/help.js"></script>
 	<script src="./models/validation.js"></script>
