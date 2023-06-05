@@ -1,75 +1,68 @@
 /** Dự án quản lý nhân viên
- * Input : Du liẹu nguoi dung nhap vao: maSV, Hoten.. (theo layout)
+ * Input : Du liẹu nguoi dung nhap vao: taiKhoan, Hoten.. (theo layout)
  * 
  * Output: xuất ra kết q
- * uả là thông tin sinh viên
+ * uả là thông tin nhân viên
  */
-var arrSinhVien = [];
+var arrNhanVien = [];
 
 getStorage();
-console.log(arrSinhVien);
+console.log(arrNhanVien);
 renderGiaoDien();
 
 function renderGiaoDien(){
     var content ="";
-    // khi chúng ta gọi dữ liệu từ localStorge lên và sd, các obj bên trong mảng arrSinhvien đã bị mất đi các phương thức
-    //  idea là sẽ tạo ra một đối tượng mới từ lớp đối tượng SinhVien đang có và gán cho đối tượng đó tất cả thuộc tính đang có của từng obj bên trong arrSinhvien sau khi gọi getStorge
+    // khi chúng ta gọi dữ liệu từ localStorge lên và sd, các obj bên trong mảng arrNhanVien đã bị mất đi các phương thức
+    //  idea là sẽ tạo ra một đối tượng mới từ lớp đối tượng NhanVien đang có và gán cho đối tượng đó tất cả thuộc tính đang có của từng obj bên trong arrNhanVien sau khi gọi getStorge
 
-    for (var i = 0; i < arrSinhVien.length; i++ ) {
-        var themSinhVien = new SinhVien();
-        console.log(themSinhVien);
-        var sinhVienItem = arrSinhVien[i];
-        console.log(themSinhVien);
+    for (var i = 0; i < arrNhanVien.length; i++ ) {
+        var themNhanVien = new NhanVien();
+        console.log(themNhanVien);
+        var NhanVienItem = arrNhanVien[i];
+        console.log(NhanVienItem);
         // Object.assign giúp clone ra 1 obj mới các thuộc tính 
-        Object.assign(themSinhVien, sinhVienItem);
-        var diemTrungBinh = themSinhVien.tinhDiemTrungBinh();
-        var xepLoai = themSinhVien.xepLoai();
+        Object.assign(themNhanVien, NhanVienItem);
+        var tinhTongLuong = themNhanVien.tinhTongLuong();
+        var xepLoai = themNhanVien.xepLoai();
         content += `
         <tr>
-            <td>${themSinhVien.maSinhVien}</td>
-            <td>${themSinhVien.hoTen}</td>
-            <td>${themSinhVien.email}</td>
-            <td>${themSinhVien.ngaySinh}</td>
-            <td>${themSinhVien.khoaHoc}</td>
-            <td>${diemTrungBinh.toFixed(1)}</td>
+            <td>${themNhanVien.taiKhoan}</td>
+            <td>${themNhanVien.hoTen}</td>
+            <td>${themNhanVien.email}</td>
+            <td>${themNhanVien.ngayLam}</td>
+            <td>${themNhanVien.chucVu}</td>
+            <td>${tinhTongLuong}</td>
             <td>${xepLoai}</td>
             <td>
-                <button onclick="xoaSinhVien('${themSinhVien.maSinhVien}')" class="btn btn-danger">
-                 <i class="fa-solid fa-trash"></i>
-                Del
+                <button onclick="xoaNhanVien('${themNhanVien.taiKhoan}')" class="btn btn-danger">
+                Delete
                 </button>
-                <button onclick="editSinhVien('${themSinhVien.maSinhVien}')"  class="btn btn-warning">
-                 <i class="fa-solid fa-pen"></i>
+                <button onclick="editNhanVien('${themNhanVien.taiKhoan}')"  class="btn btn-warning" data-toggle="modal" data-target="#myModal">
                 Edit
                 </button>
             </td>
         </tr>
         `;
     }
-    document.getElementById("tbodySinhVien").innerHTML = content;
-    // console.log(themSinhVien);
+    document.getElementById("tableDanhSach").innerHTML = content;
+    // console.log(themNhanVien);
 }
 
-function themSinhVien(){
+function themNhanVien(){
     // lấy dữ liệu người dùng
-    sinhVien = layGiaTriInput();
+    nhanVien = layGiaTriInput();
+    console.log(nhanVien);
     // nếu undefine thì chặn hành động bên dưới
-    if (sinhVien) {
+    if (nhanVien) {
         // thêm sv vào mảng
-        arrSinhVien.push(sinhVien);
-        saveStorage(arrSinhVien);
+        arrNhanVien.push(nhanVien);
+        saveStorage(arrNhanVien);
         // render giao diện
         renderGiaoDien();
         // reset input sau khi thêm thành công
-        ganGiaTriChoInput("", "", "","", "", "", "", "", "");
-    }
-    // demo check dữ liệu người dùng
-    // if (_diemToan < 0 || _diemToan>10) {
-    //     alert("Nhap sai roi");
-    //     return;
-    // }
-
-    
+        // ganGiaTriChoInput("", "", "","", "", "", "", "");
+        document.getElementById("inputForm").reset();
+    }  
 }
 
 // chạy vòng lặp để duyệt mảng
@@ -77,68 +70,48 @@ function themSinhVien(){
 // CRUD (create, read, delete, update)
 // xoá sv khỏi mảng
 
-function xoaSinhVien(maSinhVien) {
-    var index = timViTriSV(maSinhVien);
+function xoaNhanVien(taiKhoan) {
+    var index = timViTriSV(taiKhoan);
     if (index != -1 ) {
-        arrSinhVien.splice(index, 1);
-        saveStorage(arrSinhVien);
+        arrNhanVien.splice(index, 1);
+        saveStorage(arrNhanVien);
         renderGiaoDien();
     } 
 }
 // tìm vị trí phần tử
 // cho nút cập nhật hiển thị
 // hiển thị thông tin cho người dùng chỉnh sửa 
-function editSinhVien(maSinhVien) {
-    var index = timViTriSV(maSinhVien);
+function editNhanVien(taiKhoan) {
+    var index = timViTriSV(taiKhoan);
     // hiển thị button
-    document.getElementById("btnSuaSV").style.display = "inline-block";
-    var sinhVien = arrSinhVien[index];
+    // document.getElementById("btnSuaSV").style.display = "inline-block";
+    var nhanVien = arrNhanVien[index];
     ganGiaTriChoInput(
-        sinhVien.maSinhVien,
-        sinhVien.hoTen,
-        sinhVien.email,
-        sinhVien.matKhau,
-        sinhVien.ngaySinh,
-        sinhVien.khoaHoc,
-        sinhVien.diemToan,
-        sinhVien.diemLy,
-        sinhVien.diemHoa,
+        nhanVien.taiKhoan,
+        nhanVien.hoTen,
+        nhanVien.email,
+        nhanVien.matKhau,
+        nhanVien.ngayLam,
+        nhanVien.luongCoBan,
+        nhanVien.chucVu,
+        nhanVien.gioLam,
     );
-    document.getElementById("txtMaSV").readOnly = true;
+    document.getElementById("tknv").readOnly = true;
 }
 
 function capNhatThongTinSV(){
-    console.log("sinhVienDaChinhSua");
+
     // lấy giá trị người dùng
-    sinhVienDaChinhSua = layGiaTriInput();
+    NhanVienDaChinhSua = layGiaTriInput();
+    console.log(NhanVienDaChinhSua.taiKhoan);
     // tìm vị trí sv
-    var index = timViTriSV(sinhVienDaChinhSua.maSinhVien);
+    var index = timViTriSV(NhanVienDaChinhSua.taiKhoan);
     
-    console.log(sinhVienDaChinhSua);
+    console.log(NhanVienDaChinhSua);
     // sau khi tìm được vi tri index cua Ptử trong mảng => thay thế giá trị mới
-    arrSinhVien[index] = sinhVienDaChinhSua;
-    saveStorage(arrSinhVien);
+    arrNhanVien[index] = NhanVienDaChinhSua;
+    saveStorage(arrNhanVien);
     // render giao diện
     renderGiaoDien();
 }
 // document.getElementById("btnSuaSV").onclick = capNhatThongTinSV();
-
-
-// 1905 thêm mảng vào localStorage, kiểu string
-// lưu trữ dạng key : value
-// khi lưu trữ các loại dữ liệu khác string, gọi ra phương thức JSON.stringify(giá trị cần chuyển đổi) để đổi kiểu dữ liệu về dạng json string và lưu trữ được, nếu ko value khi lưu sẽ có dạng obj
-
-// localStorage.setItem("tenSinhVien", "Nguyễn Đình Sang");
-// var sinhVienChamChi = {
-//     hoTen: "Nam",
-//     xepLoai: "Khá",
-// }
-// localStorage.setItem("sinhvienNam", JSON.stringify(sinhVienChamChi));
-
-// phương thức get
-// var hoTenSinhVien = localStorage.getItem("sinhVienNam");
-// console.log(typeof hoTenSinhVien);
-// console.log(JSON.parse(hoTenSinhVien));
-
-// phương thức remove
-// localStorage.removeItem("tenSinhVien");

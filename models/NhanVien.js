@@ -10,17 +10,25 @@ function NhanVien(__taiKhoan, __hoTen, __email, __matKhau, __ngayLam, __luongCoB
 
     // tạo phương thức tính lương (function ko tên)
     this.tinhTongLuong = function () {
-        return (this.ngayLam * this.luongCoBan);
+        if (this.chucVu == 'giam_doc') {
+            return (this.luongCoBan * 3);
+        } else if (this.chucVu == 'truong_phong') {
+            return (this.luongCoBan * 2);
+        } else {
+            return (this.luongCoBan);
+        }
+       
     }
 
     this.xepLoai = function(){
-        var diemTrungBinh = (this.diemToan + this.diemLy + this.diemHoa)/3;
-        if (diemTrungBinh < 5){
-            return "Kém quá ba";
-        } else if (diemTrungBinh >= 5 && diemTrungBinh < 8) {
-            return "Ket quả khá";
-        } else if (diemTrungBinh >= 8) {
-            return "Ket quả giỏi";
+        if (this.gioLam >= 192){
+            return "NV xuất sắc";
+        } else if (this.gioLam >= 176 && this.gioLam < 192) {
+            return "NV giỏi";
+        } else if (this.gioLam >= 160 && this.gioLam < 176){
+            return "NV khá";
+        } else {
+            return "NV trung bình";
         }
     }
 }

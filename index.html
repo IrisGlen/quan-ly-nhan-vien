@@ -187,7 +187,7 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 
-					<form role="form">
+					<form role="form" id="inputForm">
 
 						<div class="form-group">
 							<div class="input-group">
@@ -195,7 +195,7 @@
 									<span class="input-group-text"><i class="fa fa-user"></i></span>
 								</div>
 								<input type="text" name="tk" id="tknv" class="form-control input-sm"
-									placeholder="Tài khoản">
+									placeholder="Tài khoản (tối đa từ 4 ~ 6 ký số)">
 							</div>
 
 							<span class="sp-thongbao" id="tbTKNV"></span>
@@ -262,9 +262,9 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-briefcase"></i></span>
 								</div>
-								<select class="form-control" id="chucvu">
+								<select class="form-control" id="chucVu">
 									<option value="">Chọn chức vụ</option>
-									<option value="sep">Sếp</option>
+									<option value="giam_doc">Giám đốc</option>
 									<option value="truong_phong">Trưởng phòng</option>
 									<option value="nhan_vien">Nhân viên</option>
 								</select>
@@ -278,7 +278,7 @@
 									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
 								</div>
 								<input type="text" name="gioLam" id="gioLam" class="form-control input-sm"
-									placeholder="Giờ làm">
+									placeholder="Giờ làm (8 ~ 200 giờ)">
 							</div>
 							<span class="sp-thongbao" id="tbGiolam"></span>
 						</div>
@@ -288,8 +288,8 @@
 
 				<!-- Modal footer -->
 				<div class="modal-footer" id="modal-footer">
-					<button id="btnThemNV" type="button" class="btn btn-success">Thêm người dùng</button>
-					<button id="btnCapNhat" type="button" class="btn btn-success">Cập nhật</button>
+					<button onclick="themNhanVien()" id="btnThemNV" type="button" class="btn btn-success">Thêm người dùng</button>
+					<button onclick="capNhatThongTinSV()" id="btnCapNhat" type="button" class="btn btn-success">Cập nhật</button>
 					<button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
 
